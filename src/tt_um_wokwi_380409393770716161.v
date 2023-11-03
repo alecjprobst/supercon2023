@@ -18,6 +18,8 @@ module tt_um_wokwi_380409393770716161 (
 	wire red, green, blue;
 	wire h_sync, v_sync;
 	wire bright;
+
+	assign uio_oe = 8'b11111111;
 	
 	// Tiny VGA PMOD compatible outputs
 	assign uo_out[0] = red;    // R1
