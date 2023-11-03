@@ -14,18 +14,10 @@ module tt_um_wokwi_380409393770716161 (
     input  wire       rst_n     // reset_n - low to reset
 );
 	wire [9:0] h_count, v_count;
-	wire [8:0] bird_pos, hole_pos;
-	wire [9:0] pipe_pos;
-	wire [7:0] score;
+	wire [8:0] pixel_pos;
 	wire red, green, blue;
 	wire h_sync, v_sync;
-	wire game_button;
 	wire bright;
-	
-	assign uio_oe = 8'b11111111;
-	assign uio_out = score;
-	
-	assign game_button = ui_in[0];
 	
 	// Tiny VGA PMOD compatible outputs
 	assign uo_out[0] = red;    // R1
@@ -37,10 +29,10 @@ module tt_um_wokwi_380409393770716161 (
 	assign uo_out[6] = blue;   // B0
 	assign uo_out[7] = h_sync; // hsync
 	
-	gameControl game (clk, rst_n, v_sync, game_button, bird_pos, hole_pos, pipe_pos, score);
+	gameControl game (clk, rst_n, v_sync, pixel_pos);
 	
 	vgaControl controller (clk, rst_n, h_sync, v_sync, bright, h_count, v_count);
 	
-	bitGen bitGenerator (clk, rst_n, bright, h_count, v_count, bird_pos, hole_pos, pipe_pos, red, green, blue);
+	bitGen bitGenerator (clk, rst_n, bright, h_count, v_count, pixel_pos, red, green, blue);
 	
 endmodule
