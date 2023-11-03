@@ -1,5 +1,5 @@
 module gameControl (
-	input wire clock, reset, v_sync, button,
+	input wire clock, reset, v_sync,
 	output reg [8:0] pixel_pos
 );
 	reg game_over;
