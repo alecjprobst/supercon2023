@@ -2,8 +2,7 @@
 module bitGen (
 	input wire clock, reset, bright,
 	input wire [9:0] h_count, v_count,
-	input wire [8:0] bird_pos, hole_pos,
-	input wire [9:0] pipe_pos,
+	input wire [8:0] pixel_pos,
 	output reg red, green, blue
 );
 	
@@ -29,19 +28,12 @@ module bitGen (
 	begin
 		if(bright)
 		begin
-			if(h_count > 10'd50 && h_count < 10'd100 && v_count < {1'b0, bird_pos} && (v_count > {1'b0, bird_pos - 9'd50} || bird_pos < 9'd50))
+			if(h_count > 10'd50 && h_count < 10'd100 && v_count < {1'b0, pixel_pos} && (v_count > {1'b0, pixel_pos - 9'd50} || pixel_pos < 9'd50))
 			begin
-				// yellow (for the bird)
+				// white (for the pixel)
 				next_red = 1'b1;
 				next_green = 1'b1;
-				next_blue = 1'b0;
-			end
-			else if(h_count < pipe_pos && (h_count > pipe_pos - 10'd100 || pipe_pos < 10'd100) && (v_count < {1'b0, hole_pos} || v_count > {1'b0, hole_pos + 9'd150}))
-			begin
-				// green (for the pipe)
-				next_red = 1'b0;
-				next_green = 1'b1;
-				next_blue = 1'b0;
+				next_blue = 1'b1;
 			end
 			else
 			begin
