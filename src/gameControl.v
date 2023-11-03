@@ -38,9 +38,7 @@ module gameControl (
 		else if(update_pulse) begin
 			if(!game_over)
 			begin
-			end
-			else 
-			begin
+				pixel_pos <= 9'd300;
 			end
 		end
 	end
